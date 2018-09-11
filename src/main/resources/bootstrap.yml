@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: eureka
+
+server:
+  port: 8761
+  servlet-path: /
+  connection-timeout: 60000
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${spring.application.name}:${server.port}/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    hostname: ${spring.application.name}
+  server:
+    rate-limiter-enabled: true
+    rate-limiter-throttle-standard-clients: true
+
+security:
+  basic:
+    enabled: false
