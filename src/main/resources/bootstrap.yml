@@ -12,13 +12,14 @@ eureka:
     register-with-eureka: true
     fetch-registry: false
     service-url:
-      defaultZone: http://${spring.application.name}:${server.port}/eureka/
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   instance:
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-    hostname: ${spring.application.name}
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${spring.application.instance_id:${server.port}}
+#    instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}},
   server:
     rate-limiter-enabled: true
     rate-limiter-throttle-standard-clients: true
+
 
 security:
   basic:
